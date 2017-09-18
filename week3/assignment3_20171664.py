@@ -61,15 +61,17 @@ def doScoreDB(scdb):
                 if p['Name'] == parse[1]:
                     print("Age=" + p['Age'], "Name=" + p['Name'], "Score=" + p['Score'])
         elif parse[0] == 'inc':
-            for p in scdb:
-                if p['Name'] == parse[1]:
-                    s = p['Score']
-                    s = int(s)
-                    p = parse[2]
-                    p = int(p)
-                    s += p
-                    s = str(s)
-                    p['Score'] = s
+            try:  # 미입력시 예외 처리
+                for p in scdb_total:
+                    if p['Name'] == parse[1]:  # 입력받은 이름과 같은 이름이 있으면
+                        num = parse[2]  # str을 int로 바꾸어준다
+                        intnum = int(num)
+                        p['Score'] += intnum
+                    else:
+                        print("똑바로 입력하세요")
+            except IndexError:
+                print("이름과 합할 점수를 입력하세요")
+                break
         else:
             print("Invalid command: " + parse[0])
 
