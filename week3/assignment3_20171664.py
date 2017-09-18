@@ -37,8 +37,18 @@ def doScoreDB(scdb):
         if inputstr == "": continue
         parse = inputstr.split(" ")
         if parse[0] == 'add':
-            record = {'Name': parse[1], 'Age': parse[2], 'Score': parse[3]}
-            scdb += [record]
+            try:
+                record = {'Name': parse[1], 'Age': parse[2], 'Score': parse[3]}
+                scdb_total += [record]
+            except IndexError:
+                print("이름과 나이, 점수를 입력하세요")
+        elif parse[0] == 'del':
+            try:
+                for p in scdb_total:
+                    if p['Name'].lower() == parse[1].lower():
+                        scdb_total.remove(p)
+            except IndexError:
+                print("이름을 입력하세요")
         elif parse[0] == 'del':
             for n in range(len(scdb)):
                 for p in scdb:
