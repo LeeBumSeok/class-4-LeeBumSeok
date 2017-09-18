@@ -43,18 +43,14 @@ def doScoreDB(scdb):
             except IndexError:
                 print("이름과 나이, 점수를 입력하세요")
         elif parse[0] == 'del':
-            try:
-                for p in scdb_total:
-                    if p['Name'].lower() == parse[1].lower():
-                        scdb_total.remove(p)
-            except IndexError:
-                print("이름을 입력하세요")
-        elif parse[0] == 'del':
-            for n in range(len(scdb)):
-                for p in scdb:
-                    if p['Name'] == parse[1]:
-                        scdb.remove(p)
-                        break
+            rmlist = []
+            for p in scdb:
+                if p['Name'] == parse[1]:
+                    rmlist.append(p)
+            for p in rmlist:
+                scdb.remove(p)
+            if not (rmlist):  # 빈 리스트는 false값을 가지므로,, rmlist가 비어있으면 프린트할것.
+                print("There is no person matches with input name")
         elif parse[0] == 'show':
             sortKey = 'Name' if len(parse) == 1 else parse[1]
             showScoreDB(scdb, sortKey)
