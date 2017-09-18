@@ -1,6 +1,7 @@
 import pickle
 
 dbfilename = 'test3_4.dat'
+scdb_total = []
 
 
 def readScoreDB():
@@ -9,8 +10,6 @@ def readScoreDB():
     except FileNotFoundError as e:
         print("New DB: ", dbfilename)
         return []
-
-    scdb = []
     try:
         scdb = pickle.load(fH)
     except:
@@ -18,7 +17,11 @@ def readScoreDB():
     else:
         print("Open DB: ", dbfilename)
     fH.close()
-    return scdb
+    for p in scdb:
+        scdb_age = int(p['Age'])
+        scdb_score = int(p['Score'])
+        scdb_total.append({'Name': p['Name'], 'Age': scdb_age, 'Score': scdb_score})
+    return scdb_total
 
 
 # write the data into person db
