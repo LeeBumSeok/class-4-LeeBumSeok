@@ -7,6 +7,7 @@ from hangman import Hangman
 from guess import Guess
 from word import Word
 
+# 교수님 한 학기동안 감사했습니다. 군대에 다녀와서 더 좋은 모습 보여 드리도록 노력하겠습니다. 감사합니다.
 
 class HangmanGame(QWidget):
     def __init__(self, parent=None):
